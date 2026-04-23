@@ -4,30 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Regristration Form</title>
+    <title>Registration Form</title>
+
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
 </head>
+<style>
+    .success-message {
+        color: green;
+        font-weight: bold;
+    }
+</style>
 
 <body>
 
-
-    <h1>Regristration Form</h1>
+    <h1>Registration Form</h1>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% for category, message in messages %}
-    <p style="color: green; font-weight: bold;">{{ message }}</p>
+    <p class="success-message">{{ message }}</p>
+
+    <script>
+        console.log("Registration successful (Flask)");
+    </script>
     {% endfor %}
     {% endwith %}
 
-    <form action="/" method="post">
+    <form action="/" method="post" onsubmit="return validateForm()">
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br><br>
+        <label>Email:</label>
+        <input title="email" type="email" id="email" name="email" required><br><br>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br><br>
+        <label>Password:</label>
+        <input title="password" type="password" id="password" name="password" required><br><br>
 
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" onclick="showLog()">
     </form>
+
 </body>
 
 </html>
